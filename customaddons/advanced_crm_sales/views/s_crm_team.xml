@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="s_crm_team_extend_form" model="ir.ui.view">
+            <field name="name">crm_team_extend form</field>
+            <field name="model">crm.team</field>
+            <field name="inherit_id" ref="sales_team.crm_team_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//page[@name='members_users']" position="before">
+                    <page string="Monthly Sales (VAT)" name="monthly_sales_notes"
+                          groups="advanced_crm_sales.group_staff_leader">
+                        <group>
+                            <group>
+                                <field name="january_sales" widget="monetary"/>
+                                <field name="february_sales" widget="monetary"/>
+                                <field name="march_sales" widget="monetary"/>
+                                <field name="april_sales" widget="monetary"/>
+                                <field name="may_sales" widget="monetary"/>
+                                <field name="june_sales" widget="monetary"/>
+                            </group>
+                            <group>
+                                <field name="july_sales" widget="monetary"/>
+                                <field name="august_sales" widget="monetary"/>
+                                <field name="september_sales" widget="monetary"/>
+                                <field name="october_sales" widget="monetary"/>
+                                <field name="november_sales" widget="monetary"/>
+                                <field name="december_sales" widget="monetary"/>
+                            </group>
+                        </group>
+                    </page>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

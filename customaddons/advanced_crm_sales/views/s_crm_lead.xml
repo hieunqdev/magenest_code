@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="s_crm_lead">
+            <field name="name">crm.lead.form.inherit</field>
+            <field name="model">crm.lead</field>
+            <field name="inherit_id" ref="crm.crm_lead_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='priority']" position="before">
+                    <field name="is_lost" invisible="1"/>
+                </xpath>
+
+                <xpath expr="//field[@name='priority']" position="attributes">
+                    <attribute name="attrs">{'invisible': [('is_lost', '=', True)]}</attribute>
+                </xpath>
+                <xpath expr="//field[@name='user_id']" position="after">
+                    <field name="sales_team_id"/>
+                    <field name="quotation_count" invisible="1"/>
+                    <field name="minimum_revenue" attrs="{'readonly':[('quotation_count', '>', 0)]}"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

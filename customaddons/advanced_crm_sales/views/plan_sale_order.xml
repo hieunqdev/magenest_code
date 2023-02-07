@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="plan_sale_order_view_form">
+            <field name="name">plan.sale.order.view.form</field>
+            <field name="model">plan.sale.order</field>
+            <field name="arch" type="xml">
+                <header>
+                    <field name="hide" invisible="1"/>
+                    <button name="btn_send" type="object" string="Send" class="oe_highlight"
+                            attrs="{'invisible': [('hide','=', True)]}"/>
+                    <field name="state" widget="statusbar"/>
+                </header>
+                <form name="Plan Sale Order">
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit-only"/>
+                            <h1>
+                                <field name="name" placeholder="Plan Sale Order Name"/>
+                            </h1>
+                        </div>
+                        <group>
+                            <field name="quotation"/>
+                            <field name="content"/>
+                        </group>
+                        <notebook>
+                            <page string="Approver List" name="approver_list_notes">
+                                <field name="approver_id">
+                                    <tree>
+                                        <field name="approver"/>
+                                        <field name="approval_status"/>
+                                        <button name="btn_approve" string="Approve" type="object" class="oe_highlight"/>
+                                        <button name="btn_refuse" string="Refuse" type="object" class="oe_highlight"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                    <div class="oe_chatter">
+                        <field name="message_follower_ids"/>
+                        <field name="activity_ids"/>
+                        <field name="message_ids"/>
+                    </div>
+                </form>
+            </field>
+        </record>
+
+        <record id="plan_sale_order_view_tree" model="ir.ui.view">
+            <field name="name">plan.sale.order.view.tree</field>
+            <field name="model">plan.sale.order</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                    <field name="quotation"/>
+                    <field name="content"/>
+                </tree>
+            </field>
+        </record>
+
+        <record model="ir.actions.act_window" id="plan_sale_order_action">
+            <field name="name">Plan Sale Order</field>
+            <field name="res_model">plan.sale.order</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <menuitem id="plan_sale_order_menu" parent="sale.sale_menu_root" name="Plan Sale Order"
+                  action="plan_sale_order_action"/>
+    </data>
+</odoo>
