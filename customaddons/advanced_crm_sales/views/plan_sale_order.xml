@@ -8,7 +8,7 @@
                 <header>
                     <field name="hide" invisible="1"/>
                     <button name="btn_send" type="object" string="Send" class="oe_highlight"
-                            attrs="{'invisible': [('hide','=', True)]}"/>
+                            attrs="{'invisible':['|', ('hide','=', True), ('state','in',('send','approve'))]}"/>
                     <field name="state" widget="statusbar"/>
                 </header>
                 <form name="Plan Sale Order">
@@ -16,21 +16,22 @@
                         <div class="oe_title">
                             <label for="name" class="oe_edit-only"/>
                             <h1>
-                                <field name="name" placeholder="Plan Sale Order Name"/>
+                                <field name="name" placeholder="Plan Sale Order Name" attrs="{'readonly': [('hide','=', True)], 'readonly':[('state','in',('send', 'approve'))]}"/>
                             </h1>
                         </div>
                         <group>
-                            <field name="quotation"/>
-                            <field name="content"/>
+                            <field name="quotation" attrs="{'readonly': [('hide','=', True)], 'readonly':[('state','in',('send', 'approve'))]}"/>
+                            <field name="content" attrs="{'readonly': [('hide','=', True)], 'readonly':[('state','in',('send', 'approve'))]}"/>
                         </group>
                         <notebook>
-                            <page string="Approver List" name="approver_list_notes">
-                                <field name="approver_id">
+                            <page string="Approver List" name="approver_list_notes" >
+                                <field name="approver_id" attrs="{'readonly': [('hide','=', True)], 'readonly':[('state','in',('send', 'approve'))]}">
                                     <tree>
+                                        <field name="hide" invisible="1"/>
                                         <field name="approver"/>
                                         <field name="approval_status"/>
-                                        <button name="btn_approve" string="Approve" type="object" class="oe_highlight"/>
-                                        <button name="btn_refuse" string="Refuse" type="object" class="oe_highlight"/>
+                                        <button name="btn_approve" string="Approve" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('hide','=', True), ('approval_status', 'in', ('approve', 'refuse'))]}"/>
+                                        <button name="btn_refuse" string="Refuse" type="object" class="oe_highlight" attrs="{'invisible': ['|', ('hide','=', True), ('approval_status', 'in', ('approve', 'refuse'))]}"/>
                                     </tree>
                                 </field>
                             </page>

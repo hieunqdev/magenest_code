@@ -28,12 +28,10 @@ class PlanSaleOrder(models.Model):
                     rec.hide = False
 
     def btn_send(self):
-        if self.state == 'new':
-            if self.approver_id:
-                self.state = 'send'
-                self.message_post(partner_ids=self.approver_id.approver.mapped('id'),
-                                  body='The new plan has been sent.')
-            else:
-                raise UserError('Please write your approvers')
+        if self.approver_id:
+            self.state = 'send'
+            self.approver_id.approval_status = 'not approved yet'
+            self.message_post(partner_ids=self.approver_id.approver.mapped('id'),
+                              body='The new plan has been sent.')
         else:
-            raise UserError('Cannot confirm this approve')
+            raise UserError('Please write your approvers')

@@ -6,9 +6,11 @@ class SCrmLead(models.Model):
     _inherit = 'crm.lead'
 
     is_lost = fields.Boolean()
-    sales_team_id = fields.Many2one('crm.team', string='Sales Team', compute='_sales_team_id')
+    sales_team_id = fields.Many2one('crm.team', string='Sales Team', compute='_sales_team_id', store=True)
     quotation_count = fields.Integer()
     minimum_revenue = fields.Float(string='Minimum Revenue (VAT)')
+    create_month = fields.Integer(string='Create Month', compute='_compute_create_month', store=True)
+    real_revenue = fields.Float(string='Real Revenue', compute='_compute_real_revenue')
 
     # Only leader has the right to lose 3 stars
     def action_set_lost(self, **additional_values):
@@ -42,8 +44,10 @@ class SCrmLead(models.Model):
         leader_id_results = self.env['crm.team'].search([('user_id', 'in', team_user_ids)])
         leader_id = leader_id_results.user_id.id
 
+        user_ids = self.env['res.users'].search([])
+
         if current_uid == leader_id:
-            employee_ids = team_user_ids
+            employee_ids = user_ids.mapped('id')
         else:
             for id in team_user_ids:
                 if id != leader_id:
@@ -59,3 +63,17 @@ class SCrmLead(models.Model):
             if rec.user_id:
                 crm_team_id_results = rec.env['crm.team.member'].search([('user_id', '=', rec.user_id.id)])
                 rec.sales_team_id = crm_team_id_results.crm_team_id.id
+
+    @api.depends('create_date')
+    def _compute_create_month(self):
+        for rec in self:
+            if rec.create_date:
+                rec.create_month = rec.create_date.month
+
+    # Calculate real_revenue = amount_total corresponding to the opportunity
+    def _compute_real_revenue(self):
+        for rec in self:
+            if rec.id:
+                amount_total = self.env['sale.order'].search([('opportunity_id', '=', rec.id)])
+                amount_total_opportunity = amount_total.mapped('amount_total')
+                rec.real_revenue = sum(amount_total_opportunity)
