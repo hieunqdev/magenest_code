@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="advanced_crm_sales_staff">
+            <field name="name">Advanced CRM Sales</field>
+            <field name="sequence">10</field>
+        </record>
+
+        <record model="res.groups" id="group_staff_employee">
+            <field name="name">Employee</field>
+            <field name="category_id" ref="advanced_crm_sales_staff"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record model="res.groups" id="group_staff_manager">
+            <field name="name">Manager</field>
+            <field name="category_id" ref="advanced_crm_sales_staff"/>
+            <field name="implied_ids" eval="[(4, ref('group_staff_employee'))]"/>
+        </record>
+
+        <record model="res.groups" id="group_staff_leader">
+            <field name="name">Leader</field>
+            <field name="category_id" ref="advanced_crm_sales_staff"/>
+            <field name="implied_ids" eval="[(4, ref('group_staff_manager'))]"/>
+        </record>
+    </data>
+</odoo>
