@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<odoo>
+    <data>
+        <!--tree view-->
+        <record model="ir.ui.view" id="employee_order_limit_view_tree">
+            <field name="name">employee.order.limit.view.tree</field>
+            <field name="model">employee.order.limit</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="employee_id" string="Name"/>
+                    <field name="order_limit"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--form view-->
+        <record model="ir.ui.view" id="employee_order_limit_view_form">
+            <field name="name">employee.order.limit.view.form</field>
+            <field name="model">employee.order.limit</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <group>
+                            <field name="employee_id"/>
+                            <field name="order_limit"/>
+                        </group>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--actions-->
+        <record model="ir.actions.act_window" id="employee_order_limit_action">
+            <field name="name">Employee Order Limit</field>
+            <field name="res_model">employee.order.limit</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--menu-->
+        <menuitem id="employee_order_limit_menu" parent="purchase.menu_purchase_root"
+                  name="Employee Order Limit" action="employee_order_limit_action"
+                  groups="advanced_purchase.group_staff_accountant"/>
+    </data>
+</odoo>

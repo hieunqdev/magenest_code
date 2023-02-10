@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.module.category" id="advanced_purchase_staff">
+            <field name="name">Advanced Purchase</field>
+            <field name="sequence">10</field>
+        </record>
+
+        <record model="res.groups" id="group_staff_employee">
+            <field name="name">Employee</field>
+            <field name="category_id" ref="advanced_purchase_staff"/>
+            <field name="implied_ids" eval="[(4, ref('base.group_user'))]"/>
+        </record>
+
+        <record model="res.groups" id="group_staff_accountant">
+            <field name="name">Accountant</field>
+            <field name="category_id" ref="advanced_purchase_staff"/>
+            <field name="implied_ids" eval="[(4, ref('group_staff_employee'))]"/>
+        </record>
+    </data>
+</odoo>

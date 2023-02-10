@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <!--        tree view-->
+        <record model="ir.ui.view" id="order_limit_view_tree">
+            <field name="name">order.limit.view.tree</field>
+            <field name="model">order.limit</field>
+            <field name="arch" type="xml">
+                <tree>
+                    <field name="name"/>
+                </tree>
+            </field>
+        </record>
+
+        <!--        form view-->
+        <record model="ir.ui.view" id="order_limit_view_form">
+            <field name="name">order.limit.view.form</field>
+            <field name="model">order.limit</field>
+            <field name="arch" type="xml">
+                <form>
+                    <sheet>
+                        <div class="oe_title">
+                            <label for="name" class="oe_edit-only"/>
+                            <h1>
+                                <field name="name" placeholder="Plan Sale Order Name"/>
+                            </h1>
+                        </div>
+                        <notebook>
+                            <page string="Employee Order List" name="employee_order_list">
+                                <field name="employee_order_limit_ids">
+                                    <tree>
+                                        <field name="employee_id"/>
+                                        <field name="order_limit"/>
+                                    </tree>
+                                </field>
+                            </page>
+                        </notebook>
+                    </sheet>
+                </form>
+            </field>
+        </record>
+
+        <!--        actions-->
+        <record model="ir.actions.act_window" id="order_limit_action">
+            <field name="name">Order Limit</field>
+            <field name="res_model">order.limit</field>
+            <field name="view_mode">tree,form</field>
+        </record>
+
+        <!--        menu-->
+        <menuitem id="order_limit_menu" parent="purchase.menu_purchase_root" name="Order Limit"
+                  action="order_limit_action"/>
+    </data>
+</odoo>
