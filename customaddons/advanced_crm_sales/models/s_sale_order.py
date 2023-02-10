@@ -17,7 +17,6 @@ class SSaleOrder(models.Model):
     plan_sale_order_id = fields.Many2one('plan.sale.order', string='Plan Sale Order', domain=_domain_plan_sale_order_id)
 
     def create_plan_sale_order(self):
-        print(f'duoi: {self.name}')
         if self.partner_id:
             return {
                 'name': self.partner_id.name,

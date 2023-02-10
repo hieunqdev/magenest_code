@@ -5,13 +5,13 @@
             <field name="name">plan.sale.order.view.form</field>
             <field name="model">plan.sale.order</field>
             <field name="arch" type="xml">
-                <header>
-                    <field name="hide" invisible="1"/>
-                    <button name="btn_send" type="object" string="Send" class="oe_highlight"
-                            attrs="{'invisible':['|', ('hide','=', True), ('state','in',('send','approve'))]}"/>
-                    <field name="state" widget="statusbar"/>
-                </header>
                 <form name="Plan Sale Order">
+                    <header>
+                        <field name="hide" invisible="1"/>
+                        <button name="btn_send" type="object" string="Send" class="oe_highlight"
+                                attrs="{'invisible':['|', ('hide','=', True), ('state','in',('send','approve'))]}"/>
+                        <field name="state" widget="statusbar"/>
+                    </header>
                     <sheet>
                         <div class="oe_title">
                             <label for="name" class="oe_edit-only"/>
