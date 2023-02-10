@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+        <record forcecreate="True" id="s_sales_purchase_cron_custom_monthly_update" model="ir.cron">
+            <field name="name">API Report: update own field on monthly basis</field>
+            <field name="model_id" ref="model_s_sales_purchase"/>
+            <field name="state">code</field>
+            <field name="code">model.btn_send_email()</field>
+            <field eval="True" name="active"/>
+            <field name="user_id" ref="base.user_root"/>
+            <field name="interval_number">1</field>
+            <field name="interval_type">months</field>
+            <field name="numbercall">-1</field>
+            <field eval="False" name="doall"/>
+        </record>
+    </data>
+</odoo>
