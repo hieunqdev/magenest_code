@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record model="ir.ui.view" id="s_indicator_evaluaition_inherit">
+            <field name="name">s.indicator.evaluation.form.inherit</field>
+            <field name="model">indicator.evaluation</field>
+            <field name="inherit_id" ref="advanced_crm_sales.indicator_evaluation_view_form"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='real_revenue']" position="after">
+                    <field name="real_revenue_difference" readonly="0"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

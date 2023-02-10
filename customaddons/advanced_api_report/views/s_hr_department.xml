@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<odoo>
+    <data>
+        <record id="s_hr_department_tree_view)inherit" model="ir.ui.view">
+            <field name="name">hr.department.tree.view.inherit</field>
+            <field name="model">hr.department</field>
+            <field name="inherit_id" ref="hr.view_department_tree"/>
+            <field name="arch" type="xml">
+                <xpath expr="//field[@name='real_cost']" position="after">
+                    <field name="real_cost_difference" widget="monetary" invisible="1"/>
+                </xpath>
+            </field>
+        </record>
+    </data>
+</odoo>

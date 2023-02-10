@@ -1,0 +1,55 @@
+<odoo>
+    <data>
+        <!--Email template -->
+        <record id="email_template" model="mail.template">
+            <field name="name">Email Template</field>
+            <field name="model_id" ref="advanced_api_report.model_s_sales_purchase"/>
+            <field name="email_from">{{ctx['email_from']}}</field>
+            <field name="email_to">{{ctx['email_to']}}</field>
+            <field name="subject">Báo cáo Tổng hợp Dữ liệu bán hàng và mua hàng trong tháng</field>
+            <field name="auto_delete" eval="True"/>
+            <field name="body_html"><![CDATA[
+                    <h3 style="color: red;">I. Kinh doanh</h3>
+                    <table style="width:900px;">
+                        <tr>
+                            <th style="width:300px;">Tên nhóm bán hàng</th>
+                            <th style="width:300px;">Doanh thu thực tế</th>
+                            <th style="width:300px;">Chênh lệch doanh thu thực tế so với chỉ tiêu tháng hiện tại</th>
+                        </tr>
+                        <tr>
+                            <td><t t-foreach="ctx['sale_team_name']" t-as="name">
+                                <p><t t-out="name"/></p>
+                            </t></td>
+                            <td><t t-foreach="ctx['real_revenue']" t-as="revenue">
+                                <p><t t-out="revenue"/></p>
+                            </t></td>
+                            <td><t t-foreach="ctx['real_revenue_difference']" t-as="diff">
+                                <p><t t-out="diff"/></p>
+                            </t></td>
+                        </tr>
+                    </table>
+
+                    <h3 style="color: red;">II. Mua hàng</h3>
+                    <table style="width:900px;">
+                        <tr>
+                            <th style="width:300px;">Tên phòng ban</th>
+                            <th style="width:300px;">Chi tiêu thực tế</th>
+                            <th style="width:300px;">Chênh lệch chi tiêu thực tế so với hạn mức</th>
+                        </tr>
+                        <tr>
+                            <td><t t-foreach="ctx['department_name']" t-as="name">
+                                <p><t t-out="name"/></p>
+                            </t></td>
+                            <td><t t-foreach="ctx['real_cost']" t-as="cost">
+                                <p><t t-out="cost"/></p>
+                            </t></td>
+                            <td><t t-foreach="ctx['real_cost_difference']" t-as="diff">
+                                <p><t t-out="diff"/></p>
+                            </t></td>
+                        </tr>
+                    </table>
+                ]]>
+            </field>
+        </record>
+    </data>
+</odoo>
