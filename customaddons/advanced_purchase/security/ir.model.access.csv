@@ -1,0 +1,4 @@
+id,name,model_id:id,group_id:id,perm_read,perm_write,perm_create,perm_unlink
+access_employee_order_limit_employee,access_order_limit employee,model_employee_order_limit,group_staff_employee,1,1,1,1
+access_order_limit_accountant,access_order_limit accountant,model_order_limit,group_staff_accountant,1,1,1,1
+access_s_choice_department_accountant,access_s_choice_department accountant,model_s_choice_department,group_staff_accountant,1,1,1,1
