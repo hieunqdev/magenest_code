@@ -37,6 +37,6 @@
         </record>
 
         <menuitem name="Indicator Evaluation" id="indicator_evaluation_menu" parent="crm.crm_menu_root"
-                  action="indicator_evaluation_action"/>
+                  action="indicator_evaluation_action" groups="advanced_crm_sales.group_staff_leader"/>
     </data>
 </odoo>
