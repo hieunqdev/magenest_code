@@ -12,4 +12,7 @@ class SPurchaseOrderLine(models.Model):
             vendor_line_price = self.env['product.supplierinfo'].search([('product_id', '=', self.product_id.id)], order='price asc')
             vendor_line = vendor_line_price.mapped(lambda res: (res.price, res.delay, res.partner_id.name))
             vendor_line.sort()
-            self.vendor = vendor_line[0][2]
+            if vendor_line:
+                self.vendor = vendor_line[0][2]
+            else:
+                self.vendor = ''
