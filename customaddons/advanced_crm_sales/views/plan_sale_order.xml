@@ -58,6 +58,16 @@
             </field>
         </record>
 
+        <record id="plan_sale_order_search" model="ir.ui.view">
+            <field name="name">plan.sale.order.search</field>
+            <field name="model">plan.sale.order</field>
+            <field name="arch" type="xml">
+                <search>
+                    <field name="quotation"/>
+                </search>
+            </field>
+        </record>
+
         <record model="ir.actions.act_window" id="plan_sale_order_action">
             <field name="name">Plan Sale Order</field>
             <field name="res_model">plan.sale.order</field>
