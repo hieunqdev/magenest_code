@@ -11,7 +11,7 @@ class AprroverList(models.Model):
         ('refuse', 'Refuse'),
     ], default='not approved yet', string='Status', readonly=True)
     plan_sale_order_id = fields.Many2one('plan.sale.order', string='Plan Sale Order', readonly=True)
-    hide = fields.Boolean(string='Hide', compute="_compute_hide")
+    hide = fields.Boolean(compute="_compute_hide")
 
     def btn_approve(self):
         self.approval_status = 'approve'

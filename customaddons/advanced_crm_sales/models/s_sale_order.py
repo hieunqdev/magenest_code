@@ -4,19 +4,22 @@ from odoo import models, fields, api, _
 class SSaleOrder(models.Model):
     _inherit = 'sale.order'
 
+    hide = fields.Boolean(default=True)
+
     def _domain_plan_sale_order_id(self):
-        id_results = self.env['sale.order'].search([])
-        sale_order_ids = id_results.mapped('id')
+        id_results = self.env['sale.order'].search([], order='id desc', limit=1)
+        sale_order_ids = id_results.id
 
         quotation_results = self.env['plan.sale.order'].search(
-            [('quotation', 'in', sale_order_ids), ('state', 'in', ['approve', 'refuse'])])
-        quotation_idsc = quotation_results.mapped('id')
+            [('quotation', '=', sale_order_ids), ('state', 'in', ['approve', 'refuse'])])
+        quotation_ids = quotation_results.mapped('id')
 
-        return [('id', 'in', quotation_idsc)]
+        return [('id', 'in', quotation_ids)]
 
     plan_sale_order_id = fields.Many2one('plan.sale.order', string='Plan Sale Order', domain=_domain_plan_sale_order_id)
 
     def create_plan_sale_order(self):
+        self.hide = False
         if self.partner_id:
             return {
                 'name': self.partner_id.name,
