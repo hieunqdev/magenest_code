@@ -12,7 +12,7 @@ class SPurchaseOrder(models.Model):
         current_uid = self.env.uid
         accountant_ids = self.env.ref('advanced_purchase.group_staff_accountant').users.ids
 
-        employee_line = self.env['employee.order.limit'].search([('employee_id', '=', current_uid)], limit=1)
+        employee_line = self.env['employee.order.limit'].search([('employee_id', '=', current_uid)], order='order_limit desc', limit=1)
         order_limit_employee = employee_line.order_limit
 
         if self.amount_total:
