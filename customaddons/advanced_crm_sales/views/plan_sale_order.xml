@@ -16,16 +16,16 @@
                             <label for="name" class="oe_edit-only"/>
                             <field name="hide" invisible="1"/>
                             <h1>
-                                <field name="name" placeholder="Plan Sale Order Name" attrs="{'readonly': [('hide','=', True)], 'readonly':[('state','in',('send', 'approve'))]}"/>
+                                <field name="name" placeholder="Plan Sale Order Name" attrs="{'readonly':['|', ('hide','=', True), ('state','in',('send','approve'))]}"/>
                             </h1>
                         </div>
                         <group>
-                            <field name="quotation" attrs="{'readonly': [('hide','=', True)], 'readonly':[('state','in',('send', 'approve'))]}"/>
-                            <field name="content" attrs="{'readonly': [('hide','=', True)], 'readonly':[('state','in',('send', 'approve'))]}"/>
+                            <field name="quotation" attrs="{'readonly':['|', ('hide','=', True), ('state','in',('send','approve'))]}"/>
+                            <field name="content" attrs="{'readonly':['|', ('hide','=', True), ('state','in',('send','approve'))]}"/>
                         </group>
                         <notebook>
                             <page string="Approver List" name="approver_list_notes" >
-                                <field name="approver_id" attrs="{'readonly': [('hide','=', True)], 'readonly':[('state','in',('send', 'approve'))]}">
+                                <field name="approver_id" attrs="{'readonly':['|', ('hide','=', True), ('state','in',('send','approve'))]}">
                                     <tree>
                                         <field name="hide" invisible="1"/>
                                         <field name="approver"/>
