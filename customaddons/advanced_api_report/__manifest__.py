@@ -24,10 +24,8 @@
 
     # always loaded
     'data': [
-        'security/ir.model.access.csv',
         'data/s_sales_purchase_cron.xml',
         'data/s_sales_purchase_email_template.xml',
-        'views/s_sales_purchase.xml',
         'views/s_indicator_evaluation.xml',
         'views/s_hr_department.xml'
     ],
