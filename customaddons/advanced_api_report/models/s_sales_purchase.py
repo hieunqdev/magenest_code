@@ -5,9 +5,7 @@ class SSalesPurchase(models.Model):
     _name = 's.sales.purchase'
 
     def btn_send_email(self):
-        accountant_ids = self.env.ref('advanced_purchase.group_staff_accountant').users.ids
-        res_users = self.env['res.users'].sudo().search([('id', 'in', accountant_ids)])
-        email_accountant = res_users.partner_id.mapped('email')
+        email_accountant = self.env.ref('advanced_purchase.group_staff_accountant').users.partner_id.mapped('email')
 
         indicator_evaluation = self.env['indicator.evaluation'].search([])
         hr_department = self.env['hr.department'].search([])
